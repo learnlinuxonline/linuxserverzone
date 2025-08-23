@@ -87,168 +87,84 @@
       border-radius: 3px;
     }
     
-    /* Main Content Layout */
-    .project-content {
+    /* Main Content */
+    .main-content {
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 1.5rem;
-      display: grid;
-      grid-template-columns: 1fr 3fr;
-      gap: 2rem;
     }
     
-    /* Sidebar Navigation */
-    .project-nav {
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
       background: var(--light);
-      padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      height: fit-content;
-      position: sticky;
-      top: 90px;
-    }
-    
-    .project-nav h3 {
-      color: var(--primary);
-      margin-top: 0;
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.8rem;
-      border-bottom: 2px solid var(--medium-gray);
-      font-size: 1.3rem;
-    }
-    
-    .project-nav ul {
-      list-style: none;
-    }
-    
-    .project-nav li {
-      margin: 0.8rem 0;
-    }
-    
-    .project-nav a {
-      color: var(--text);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      padding: 0.7rem;
-      border-radius: 8px;
-      transition: all 0.3s;
-      font-weight: 500;
-    }
-    
-    .project-nav a:hover {
-      background: var(--primary-light);
-      color: white;
-    }
-    
-    .project-nav a.active {
-      background: var(--primary);
-      color: white;
-    }
-    
-    /* Main Content Area */
-    .project-details {
-      background: var(--light);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    }
-    
-    .project-details h2 {
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-      font-size: 1.8rem;
-    }
-    
-    .project-details p {
-      margin-bottom: 1.5rem;
-      line-height: 1.7;
-    }
-    
-    /* Section Styles */
-    .prerequisites {
-      background: var(--light-gray);
-      padding: 1.5rem;
-      border-radius: 10px;
       margin-bottom: 2rem;
-      border-left: 4px solid var(--accent);
     }
     
-    .prerequisites h3 {
+    .hero h1 {
       color: var(--primary);
-      margin-top: 0;
       margin-bottom: 1rem;
-      font-size: 1.3rem;
+      font-size: 2.5rem;
     }
     
-    .prerequisites ul {
-      padding-left: 1.5rem;
-      margin-bottom: 0;
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text);
+      max-width: 800px;
+      margin: 0 auto;
     }
     
-    .prerequisites li {
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .project-card {
+      background: var(--light);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .project-card a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 1.5rem;
+    }
+    
+    .project-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .project-card h3 {
+      color: var(--primary);
       margin-bottom: 0.5rem;
     }
     
-    .step-section {
-      margin-bottom: 2.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--medium-gray);
-    }
-    
-    .step-section h3 {
-      color: var(--primary);
+    .project-card p {
+      color: var(--text);
       margin-bottom: 1rem;
-      font-size: 1.3rem;
+    }
+    
+    .project-meta {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .step-section h3 .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      background: var(--primary);
-      color: white;
-      border-radius: 50%;
+      justify-content: space-between;
+      color: var(--dark-gray);
       font-size: 0.9rem;
-      margin-right: 0.5rem;
-    }
-    
-    /* Code Blocks */
-    pre {
-      background: var(--light-gray);
-      padding: 1.2rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin: 1.2rem 0;
-      border: 1px solid var(--medium-gray);
-      font-family: 'Consolas', 'Monaco', monospace;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-    
-    code {
-      color: var(--secondary);
-      font-family: 'Consolas', 'Monaco', monospace;
-      font-size: 0.95rem;
-    }
-    
-    /* Note Box */
-    .note {
-      background: #fffbeb;
-      padding: 1.2rem;
-      border-radius: 8px;
-      margin: 1.2rem 0;
-      border-left: 4px solid var(--accent);
-    }
-    
-    .note strong {
-      color: var(--accent);
     }
     
     /* Footer */
@@ -262,16 +178,7 @@
     }
     
     /* Responsive Design */
-    @media (max-width: 900px) {
-      .project-content {
-        grid-template-columns: 1fr;
-      }
-      
-      .project-nav {
-        position: static;
-        margin-bottom: 1.5rem;
-      }
-      
+    @media (max-width: 768px) {
       header {
         flex-direction: column;
         text-align: center;
@@ -284,87 +191,14 @@
         justify-content: center;
         gap: 1rem;
       }
-    }
-    
-    @media (max-width: 600px) {
-      .project-content {
-        padding: 0 1rem;
+      
+      .hero h1 {
+        font-size: 2rem;
       }
       
-      .project-details, .project-nav {
-        padding: 1.2rem;
+      .projects-grid {
+        grid-template-columns: 1fr;
       }
-      
-      .project-details h2 {
-        font-size: 1.5rem;
-      }
-    }
-    
-    /* Additional Styling */
-    .command {
-      position: relative;
-    }
-    
-    .command-copy {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      background: var(--primary-light);
-      color: white;
-      border: none;
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: background 0.3s;
-    }
-    
-    .command-copy:hover {
-      background: var(--primary);
-    }
-    
-    .success-message {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--success);
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      display: none;
-      z-index: 1000;
-    }
-    
-    /* Tutorial navigation */
-    .tutorial-nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--medium-gray);
-    }
-    
-    .tutorial-nav a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .tutorial-nav a:hover {
-      text-decoration: underline;
-    }
-    
-    /* Hidden tutorial sections */
-    .tutorial-section {
-      display: none;
-    }
-    
-    .tutorial-section.active {
-      display: block;
     }
   </style>
 </head>
@@ -372,1141 +206,234 @@
   <header>
     <div class="logo">LearnLinuxOnline</div>
     <nav>
-      <a href="index.html">Home</a>
+      <a href="index.html" class="active">Home</a>
       <a href="about.html">About</a>
       <a href="courses.html">Courses</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <div class="project-content">
-    <aside class="project-nav">
-      <h3>Server Projects</h3>
-      <ul>
-        <li><a href="#" class="active" data-tutorial="dns"><i class="fas fa-network-wired"></i> DNS Server on Ubuntu</a></li>
-        <li><a href="#" data-tutorial="web-server"><i class="fas fa-server"></i> Web Server</a></li>
-        <li><a href="#" data-tutorial="cacti"><i class="fas fa-chart-line"></i> Cacti Monitoring</a></li>
-        <li><a href="#" data-tutorial="lancache"><i class="fas fa-database"></i> Lancache Server</a></li>
-        <li><a href="#" data-tutorial="issabel"><i class="fas fa-phone-alt"></i> Issabel PBX</a></li>
-        <li><a href="#" data-tutorial="flussonic"><i class="fas fa-tv"></i> TV Server with Flussonic</a></li>
-        <li><a href="#" data-tutorial="xstream"><i class="fas fa-stream"></i> XStream Server</a></li>
-        <li><a href="#" data-tutorial="virtualmin"><i class="fas fa-envelope"></i> Virtualmin + Roundcube</a></li>
-        <li><a href="#" data-tutorial="radarr"><i class="fas fa-film"></i> Radarr, Sonarr, Bazarr</a></li>
-        <li><a href="#" data-tutorial="prowlarr"><i class="fas fa-search"></i> Prowlarr</a></li>
-        <li><a href="#" data-tutorial="qbittorrent"><i class="fas fa-download"></i> qBittorrent</a></li>
-        <li><a href="#" data-tutorial="ansible"><i class="fas fa-cogs"></i> Ansible Automation</a></li>
-        <li><a href="#" data-tutorial="docker"><i class="fab fa-docker"></i> Docker & Kubernetes</a></li>
-        <li><a href="#" data-tutorial="wireguard"><i class="fas fa-shield-alt"></i> WireGuard VPN</a></li>
-        <li><a href="#" data-tutorial="proxmox"><i class="fas fa-cloud"></i> Proxmox VE</a></li>
-      </ul>
-    </aside>
-
-    <main class="project-details">
-      <!-- DNS Server Tutorial -->
-      <section id="dns" class="tutorial-section active">
-        <h2>DNS Server on Ubuntu using BIND9</h2>
-        <p>A DNS (Domain Name System) server translates human-readable domain names into IP addresses. Setting up your own DNS server gives you control over domain resolution on your network and is a fundamental skill for system administrators.</p>
-        
-        <div class="prerequisites">
-          <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
-          <ul>
-            <li>Ubuntu Server 20.04 LTS or newer</li>
-            <li>Root or sudo privileges</li>
-            <li>Static IP address configured on your server</li>
-            <li>Basic knowledge of Linux command line</li>
-          </ul>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">1</span> Install BIND9 DNS Server</h3>
-          <p>Update your package list and install BIND9 (Berkeley Internet Name Domain):</p>
-          <div class="command">
-            <pre><code>sudo apt update
-sudo apt install bind9 bind9-utils bind9-doc -y</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>BIND9 is the most widely used DNS software on the Internet, providing both authoritative and recursive name services.</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">2</span> Configure BIND9 Options</h3>
-          <p>Edit the main BIND9 configuration file:</p>
-          <div class="command">
-            <pre><code>sudo nano /etc/bind/named.conf.options</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Add the following configuration inside the options block:</p>
-          <div class="command">
-            <pre><code>options {
-    directory "/var/cache/bind";
+  <div class="main-content">
+    <div class="hero">
+      <h1>Server Projects & Tutorials</h1>
+      <p>Step-by-step guides to set up and configure various server applications on Linux systems. Perfect for beginners and advanced users alike.</p>
+    </div>
     
-    // If your DNS server should be recursive (open DNS)
-    recursion yes;
-    allow-recursion { any; };
-    
-    // If your DNS server should be authoritative only
-    // recursion no;
-    // allow-recursion { none; };
-    
-    // Allow queries from any client
-    allow-query { any; };
-    
-    // Forwarders to use for DNS resolution
-    forwarders {
-        8.8.8.8;
-        8.8.4.4;
-    };
-    
-    // DNS security extensions
-    dnssec-validation auto;
-    
-    listen-on { any; };
-    listen-on-v6 { any; };
-};</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <div class="note">
-            <strong>Note:</strong> For a production environment, restrict recursion and queries to your local network only for security reasons.
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">3</span> Create a Forward Lookup Zone</h3>
-          <p>Create a new zone file for your domain. First, edit named.conf.local:</p>
-          <div class="command">
-            <pre><code>sudo nano /etc/bind/named.conf.local</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Add the following zone configuration (replace example.com with your domain):</p>
-          <div class="command">
-            <pre><code>zone "example.com" {
-    type master;
-    file "/etc/bind/zones/db.example.com";
-};</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Create the zones directory and the zone file:</p>
-          <div class="command">
-            <pre><code>sudo mkdir /etc/bind/zones
-sudo nano /etc/bind/zones/db.example.com</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">4</span> Verify Configuration and Restart BIND9</h3>
-          <p>Check your configuration files for syntax errors:</p>
-          <div class="command">
-            <pre><code>sudo named-checkconf
-sudo named-checkzone example.com /etc/bind/zones/db.example.com</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>If all checks pass without errors, restart BIND9:</p>
-          <div class="command">
-            <pre><code>sudo systemctl restart bind9</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Check the status to ensure it's running properly:</p>
-          <div class="command">
-            <pre><code>sudo systemctl status bind9</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">5</span> Configure Firewall and Test DNS Server</h3>
-          <p>Allow DNS traffic through the firewall (if enabled):</p>
-          <div class="command">
-            <pre><code>sudo ufw allow 53/tcp
-sudo ufw allow 53/udp</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Test your DNS server using dig or nslookup:</p>
-          <div class="command">
-            <pre><code>dig @localhost www.example.com
-nslookup www.example.com localhost</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">6</span> Security Considerations</h3>
-          <ul>
-            <li>Run BIND in a chroot jail for increased security</li>
-            <li>Limit zone transfers to specific IP addresses</li>
-            <li>Use TSIG (Transaction Signature) for secure server-to-server communication</li>
-            <li>Keep BIND9 updated with security patches</li>
-            <li>Regularly monitor logs for suspicious activities</li>
-          </ul>
-        </div>
-
-        <div class="tutorial-nav">
-          <span></span>
-          <a href="#" data-next="web-server">Next: Web Server <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </section>
-
-      <!-- Web Server Tutorial -->
-      <section id="web-server" class="tutorial-section">
-        <h2>Web Server Setup with Apache/Nginx on Ubuntu</h2>
-        <p>A web server delivers content to users over the internet. This tutorial covers setting up both Apache and Nginx web servers on Ubuntu.</p>
-        
-        <div class="prerequisites">
-          <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
-          <ul>
-            <li>Ubuntu Server 20.04 LTS or newer</li>
-            <li>Root or sudo privileges</li>
-            <li>Static IP address configured</li>
-            <li>Domain name pointing to your server (optional)</li>
-          </ul>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">1</span> Install Apache Web Server</h3>
-          <p>Update packages and install Apache:</p>
-          <div class="command">
-            <pre><code>sudo apt update
-sudo apt install apache2 -y</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Check if Apache is running:</p>
-          <div class="command">
-            <pre><code>sudo systemctl status apache2</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">2</span> Configure Firewall</h3>
-          <p>Allow HTTP and HTTPS traffic:</p>
-          <div class="command">
-            <pre><code>sudo ufw allow 'Apache Full'
-sudo ufw enable</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">3</span> Test Your Web Server</h3>
-          <p>Open your web browser and navigate to your server's IP address:</p>
-          <div class="command">
-            <pre><code>http://your_server_ip</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>You should see the Apache Ubuntu default page.</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">4</span> Install Nginx (Alternative)</h3>
-          <p>If you prefer Nginx, install it instead:</p>
-          <div class="command">
-            <pre><code>sudo apt install nginx -y</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Adjust firewall for Nginx:</p>
-          <div class="command">
-            <pre><code>sudo ufw allow 'Nginx Full'</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">5</span> Configure Virtual Hosts (Apache)</h3>
-          <p>Create a directory for your domain:</p>
-          <div class="command">
-            <pre><code>sudo mkdir -p /var/www/example.com/html</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Create a virtual host configuration file:</p>
-          <div class="command">
-            <pre><code>sudo nano /etc/apache2/sites-available/example.com.conf</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">6</span> Enable SSL with Let's Encrypt</h3>
-          <p>Install Certbot for SSL certificates:</p>
-          <div class="command">
-            <pre><code>sudo apt install certbot python3-certbot-apache -y</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Obtain an SSL certificate:</p>
-          <div class="command">
-            <pre><code>sudo certbot --apache -d example.com -d www.example.com</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-
-        <div class="tutorial-nav">
-          <a href="#" data-prev="dns"><i class="fas fa-arrow-left"></i> Previous: DNS Server</a>
-          <a href="#" data-next="cacti">Next: Cacti Monitoring <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </section>
-
-      <!-- Cacti Monitoring Tutorial -->
-      <section id="cacti" class="tutorial-section">
-        <h2>Cacti Network Monitoring Setup</h2>
-        <p>Cacti is a complete network graphing solution designed to harness the power of RRDTool's data storage and graphing functionality.</p>
-        
-        <div class="prerequisites">
-          <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
-          <ul>
-            <li>Ubuntu Server 20.04 LTS</li>
-            <li>Minimum 2GB RAM, 20GB disk space</li>
-            <li>Root or sudo privileges</li>
-            <li>LAMP stack installed</li>
-          </ul>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">1</span> Install Required Packages</h3>
-          <p>Update system and install dependencies:</p>
-          <div class="command">
-            <pre><code>sudo apt update
-sudo apt install -y rrdtool snmp snmpd php-snmp php-gd php-xml php-ldap php-mbstring</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">2</span> Install Cacti</h3>
-          <p>Install Cacti package:</p>
-          <div class="command">
-            <pre><code>sudo apt install -y cacti</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>During installation, you'll be prompted to configure database and web server.</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">3</span> Configure MySQL Database</h3>
-          <p>Create Cacti database (if not done during installation):</p>
-          <div class="command">
-            <pre><code>sudo mysql -u root -p -e "CREATE DATABASE cacti DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;"</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">4</span> Complete Web Installation</h3>
-          <p>Navigate to your server's IP/cacti in a web browser:</p>
-          <div class="command">
-            <pre><code>http://your_server_ip/cacti</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Follow the web-based installation wizard.</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">5</span> Configure Poller</h3>
-          <p>Edit the crontab for the cacti user:</p>
-          <div class="command">
-            <pre><code>sudo nano /etc/cron.d/cacti</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Ensure the poller is set to run every 5 minutes:</p>
-          <div class="command">
-            <pre><code>*/5 * * * * www-data php /usr/share/cacti/site/poller.php &gt; /dev/null 2&gt;&amp;1</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-
-        <div class="tutorial-nav">
-          <a href="#" data-prev="web-server"><i class="fas fa-arrow-left"></i> Previous: Web Server</a>
-          <a href="#" data-next="lancache">Next: Lancache Server <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </section>
-
-      <!-- Lancache Server Tutorial -->
-      <section id="lancache" class="tutorial-section">
-        <h2>Lancache Server Setup</h2>
-        <p>Lancache is a caching proxy specifically designed for caching game downloads from services like Steam, Origin, Battle.net, Epic Games, and others. It can significantly reduce bandwidth usage in environments with multiple gamers.</p>
-        
-        <div class="prerequisites">
-          <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
-          <ul>
-            <li>Ubuntu Server 20.04 LTS or newer</li>
-            <li>Minimum 4GB RAM, large storage capacity (500GB+ recommended)</li>
-            <li>Root or sudo privileges</li>
-            <li>Static IP address configured on your server</li>
-            <li>Basic knowledge of Linux command line and Docker</li>
-          </ul>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">1</span> Update System and Install Dependencies</h3>
-          <p>Start by updating your system and installing the necessary dependencies:</p>
-          <div class="command">
-            <pre><code>sudo apt update && sudo apt upgrade -y
-sudo apt install -y curl git docker.io docker-compose</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>This ensures your system is up to date and installs Docker which is required for running Lancache.</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">2</span> Install Lancache</h3>
-          <p>Create the directory structure and clone the necessary repositories:</p>
-          <div class="command">
-            <pre><code># Create lancache directory
-sudo mkdir -p /srv/lancache
-cd /srv/lancache
-
-# Clone the UK Lancans repository
-git clone https://github.com/uklans/cache-domains.git
-
-# Clone the lancache-docker repository
-git clone https://github.com/lancachenet/monolithic.git
-cd monolithic</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>These repositories contain the necessary configuration and Docker setup for Lancache.</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">3</span> Configure Lancache</h3>
-          <p>Create and edit the environment configuration file:</p>
-          <div class="command">
-            <pre><code>cp .env.example .env
-nano .env</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Edit the .env file with your settings. Replace the IP address with your server's static IP:</p>
-          <div class="command">
-            <pre><code># Server IP and network configuration
-LANCACHE_IP=192.168.1.100  # Replace with your server's static IP
-CACHE_ROOT=/cache/data
-CACHE_DISK_SIZE=500g
-CACHE_MAX_AGE=3650d
-UPSTREAM_DNS=1.1.1.1 8.8.8.8
-
-# Service ports
-HTTP_PORT=80
-HTTPS_PORT=443</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <div class="note">
-            <strong>Note:</strong> Make sure to use your server's actual IP address, not the example one shown here.
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">4</span> Create Cache Directory Structure</h3>
-          <p>Create the directory where cached data will be stored and set appropriate permissions:</p>
-          <div class="command">
-            <pre><code>sudo mkdir -p /cache/data
-sudo chown -R $USER:$USER /cache</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>This ensures the cache directory exists and your user has the necessary permissions to write to it.</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">5</span> Generate Domain Lists</h3>
-          <p>Generate the list of gaming domains that Lancache will handle:</p>
-          <div class="command">
-            <pre><code># Navigate to cache-domains
-cd /srv/lancache/cache-domains
-
-# Generate the domain list
-./scripts/create-list.sh</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>This script creates <code>output/list.txt</code> with all the gaming domains that Lancache will cache.</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">6</span> Configure DNS (BIND9)</h3>
-          <p>Install and configure BIND9 for DNS redirection to your Lancache server:</p>
-          <div class="command">
-            <pre><code>sudo apt install -y bind9</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Create the Lancache DNS configuration file:</p>
-          <div class="command">
-            <pre><code>sudo nano /etc/bind/named.conf.lancache</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Add the following content (replace 192.168.1.100 with your server IP):</p>
-          <div class="command">
-            <pre><code>zone "lancache" {
-    type master;
-    file "/etc/bind/db.lancache";
-};
-
-# Include game domains
-include "/etc/bind/named.conf.lancache-domains";</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">7</span> Create DNS Zone File</h3>
-          <p>Create the main zone file for Lancache:</p>
-          <div class="command">
-            <pre><code>sudo nano /etc/bind/db.lancache</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Add the following content (replace the IP address with your server's IP):</p>
-          <div class="command">
-            <pre><code>$TTL    604800
-@       IN      SOA     lancache. root.lancache. (
-                              2         ; Serial
-                         604800         ; Refresh
-                          86400         ; Retry
-                        2419200         ; Expire
-                         604800 )       ; Negative Cache TTL
-;
-@       IN      NS      lancache.
-@       IN      A       192.168.1.100
-*       IN      A       192.168.1.100</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">8</span> Generate Domain Configuration</h3>
-          <p>Use the Python script to generate the BIND configuration for all game domains:</p>
-          <div class="command">
-            <pre><code>cd /srv/lancache/cache-domains
-sudo python3 /srv/lancache/cache-domains/scripts/create-bind-config.py \
-    --config /srv/lancache/cache-domains/config.json \
-    --output /etc/bind/named.conf.lancache-domains \
-    --ip 192.168.1.100</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Replace 192.168.1.100 with your server's actual IP address.</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">9</span> Configure BIND9</h3>
-          <p>Edit the main BIND9 configuration to include the Lancache configuration:</p>
-          <div class="command">
-            <pre><code>sudo nano /etc/bind/named.conf</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Add the following line at the end of the file:</p>
-          <div class="command">
-            <pre><code>include "/etc/bind/named.conf.lancache";</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">10</span> Start Lancache Services</h3>
-          <p>Start the Lancache Docker containers:</p>
-          <div class="command">
-            <pre><code>cd /srv/lancache/monolithic
-docker-compose up -d</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Check that all containers are running properly:</p>
-          <div class="command">
-            <pre><code>docker-compose ps</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">11</span> Configure Firewall</h3>
-          <p>Allow necessary ports through the firewall:</p>
-          <div class="command">
-            <pre><code>sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw allow 53/tcp
-sudo ufw allow 53/udp</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">12</span> Test Your Lancache Server</h3>
-          <p>Test that DNS is working correctly:</p>
-          <div class="command">
-            <pre><code>nslookup steam.cache.lancache localhost</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>This should return your server's IP address. Test downloading a game to see if caching is working.</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">13</span> Monitor Cache Performance</h3>
-          <p>Check the cache logs to monitor performance:</p>
-          <div class="command">
-            <pre><code>docker-compose logs -f nginx</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>You can also monitor disk usage of the cache:</p>
-          <div class="command">
-            <pre><code>du -sh /cache/data</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">14</span> Maintenance and Updates</h3>
-          <p>To update Lancache, pull the latest changes and restart:</p>
-          <div class="command">
-            <pre><code>cd /srv/lancache/monolithic
-git pull
-docker-compose down
-docker-compose up -d --build</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Regularly clean up old Docker images to save space:</p>
-          <div class="command">
-            <pre><code>docker system prune -a</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">15</span> Troubleshooting Common Issues</h3>
-          <ul>
-            <li><strong>DNS not resolving:</strong> Check BIND9 configuration and restart the service</li>
-            <li><strong>Downloads not caching:</strong> Verify that clients are using your DNS server</li>
-            <li><strong>Low disk space:</strong> Monitor cache size and adjust CACHE_DISK_SIZE if needed</li>
-            <li><strong>Containers not starting:</strong> Check Docker logs with <code>docker-compose logs</code></li>
-            <li><strong>Slow downloads:</strong> Verify your internet connection and server resources</li>
-          </ul>
-        </div>
-
-        <div class="tutorial-nav">
-          <a href="#" data-prev="cacti"><i class="fas fa-arrow-left"></i> Previous: Cacti Monitoring</a>
-          <a href="#" data-next="issabel">Next: Issabel PBX <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </section>
-
-      <!-- Issabel PBX Tutorial -->
-      <section id="issabel" class="tutorial-section">
-        <h2>Issabel PBX Setup</h2>
-        <p>Issabel is an open-source PBX system that provides telephony solutions for businesses. It combines Asterisk, FreePBX, and other communication tools into a single, easy-to-use platform.</p>
-        
-        <div class="prerequisites">
-          <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
-          <ul>
-            <li>CentOS 7 or 8 (recommended) or other supported Linux distribution</li>
-            <li>Minimum 2GB RAM (4GB recommended for production use)</li>
-            <li>20GB+ of disk space</li>
-            <li>Root access to the server</li>
-            <li>Static IP address</li>
-          </ul>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">1</span> Prepare the System</h3>
-          <p>Update the system and install basic dependencies:</p>
-          <div class="command">
-            <pre><code># For CentOS 7/8:
-sudo yum update -y
-sudo yum install -y wget curl net-tools
-
-# For Ubuntu/Debian:
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y wget curl net-tools</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">2</span> Download Issabel</h3>
-          <p>Download the latest Issabel ISO or installation script:</p>
-          <div class="command">
-            <pre><code># Download the installation script
-wget http://repo.issabel.org/issabel4-netinstall.sh
-
-# Make it executable
-chmod +x issabel4-netinstall.sh</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">3</span> Run the Installation</h3>
-          <p>Execute the installation script:</p>
-          <div class="command">
-            <pre><code>./issabel4-netinstall.sh</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>The installation process will take some time and will automatically install all required components.</p>
-        </div>
-        
-        <!-- Additional steps would be here -->
-        
-        <div class="tutorial-nav">
-          <a href="#" data-prev="lancache"><i class="fas fa-arrow-left"></i> Previous: Lancache Server</a>
-          <a href="#" data-next="flussonic">Next: TV Server with Flussonic <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </section>
-
-      <!-- Placeholder sections for other tutorials -->
-      <section id="flussonic" class="tutorial-section">
-        <h2>TV Server with Flussonic</h2>
-        <p>Flussonic is a professional media server for streaming live video and VOD content.</p>
-        <!-- Content would be here -->
-        <div class="tutorial-nav">
-          <a href="#" data-prev="issabel"><i class="fas fa-arrow-left"></i> Previous: Issabel PBX</a>
-          <a href="#" data-next="xstream">Next: XStream Server <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </section>
-
-      <!-- Continue with all other tutorial sections following the same pattern -->
-      <section id="xstream" class="tutorial-section">
-        <h2>XStream Server</h2>
-        <p>XStream is a media server solution for streaming content.</p>
-        <div class="tutorial-nav">
-          <a href="#" data-prev="flussonic"><i class="fas fa-arrow-left"></i> Previous: TV Server with Flussonic</a>
-          <a href="#" data-next="virtualmin">Next: Virtualmin + Roundcube <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </section>
-
-      <!-- Virtualmin + Roundcube Tutorial -->
-      <section id="virtualmin" class="tutorial-section">
-        <h2>Mail Server with Virtualmin and Roundcube on Ubuntu 20.04 LTS</h2>
-        <p>This tutorial will guide you through setting up a complete mail server using Virtualmin for server administration and Roundcube for webmail access.</p>
-        
-        <div class="prerequisites">
-          <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
-          <ul>
-            <li>Ubuntu 20.04 LTS server</li>
-            <li>Root or sudo access</li>
-            <li>Domain name pointing to your server IP</li>
-            <li>Minimum 2GB RAM recommended</li>
-          </ul>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">1</span> System Update and Preparation</h3>
-          <p>Update your system and install essential packages:</p>
-          <div class="command">
-            <pre><code>sudo apt update && sudo apt upgrade -y
-sudo apt install -y curl wget gnupg2 software-properties-common
-
-# Set hostname (replace with your domain)
-sudo hostnamectl set-hostname mail.yourdomain.com
-
-# Update hosts file
-sudo nano /etc/hosts</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Add this line to your hosts file (replace with your server IP and domain):</p>
-          <div class="command">
-            <pre><code>your_server_ip mail.yourdomain.com mail</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">2</span> Install Virtualmin</h3>
-          <p>Download and run the Virtualmin installation script:</p>
-          <div class="command">
-            <pre><code>wget http://software.virtualmin.com/gpl/scripts/install.sh
-chmod +x install.sh
-sudo ./install.sh</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>During installation, you'll be prompted to:</p>
-          <ul>
-            <li>Press Enter to continue</li>
-            <li>Choose "Y" to continue with the installation</li>
-          </ul>
-          <p>The script will install all required components (Apache, MySQL, Postfix, etc.)</p>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">3</span> Post-Installation Virtualmin Setup</h3>
-          <p>Access the Virtualmin web interface:</p>
-          <div class="command">
-            <pre><code># Open browser and go to:
-https://your-server-ip:10000</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Login with your root credentials. The first time setup wizard will guide you through:</p>
-          <ol>
-            <li>License agreement</li>
-            <li>System configuration</li>
-            <li>Network configuration</li>
-            <li>Server templates</li>
-            <li>Feature configuration</li>
-          </ol>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">4</span> Configure DNS Records</h3>
-          <p>Create these DNS records for your domain:</p>
-          <div class="command">
-            <pre><code>A record: mail.yourdomain.com → your_server_ip
-MX record: yourdomain.com → mail.yourdomain.com
-TXT record: yourdomain.com → v=spf1 a mx ip4:your_server_ip ~all</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <div class="note">
-            <strong>Note:</strong> These DNS changes may take up to 24-48 hours to propagate globally.
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">5</span> Create Virtual Server in Virtualmin</h3>
-          <ol>
-            <li>Login to Virtualmin (https://your-server-ip:10000)</li>
-            <li>Click "Create Virtual Server"</li>
-            <li>Fill in details:
-              <ul>
-                <li>Domain name: yourdomain.com</li>
-                <li>Administration password: set a strong password</li>
-                <li>Email username: admin (or your preferred username)</li>
-                <li>Email password: set email password</li>
-              </ul>
-            </li>
-            <li>Click "Create Server"</li>
-          </ol>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">6</span> Install Roundcube Webmail</h3>
-          <p>Install Roundcube and its dependencies:</p>
-          <div class="command">
-            <pre><code>sudo apt install -y roundcube roundcube-core roundcube-mysql roundcube-plugins</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Configure Roundcube to use MySQL:</p>
-          <div class="command">
-            <pre><code>sudo mysql -u root -p</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>In the MySQL prompt, run these commands:</p>
-          <div class="command">
-            <pre><code>CREATE DATABASE roundcubemail;
-GRANT ALL PRIVILEGES ON roundcubemail.* TO 'roundcube'@'localhost' IDENTIFIED BY 'strong_password';
-FLUSH PRIVILEGES;
-EXIT;</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">7</span> Configure Roundcube</h3>
-          <p>Edit the Roundcube configuration file:</p>
-          <div class="command">
-            <pre><code>sudo nano /etc/roundcube/config.inc.php</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Update the configuration with these settings:</p>
-          <div class="command">
-            <pre><code>$config['db_dsnw'] = 'mysql://roundcube:strong_password@localhost/roundcubemail';
-$config['default_host'] = 'ssl://localhost';
-$config['default_port'] = 993;
-$config['smtp_server'] = 'ssl://localhost';
-$config['smtp_port'] = 465;
-$config['smtp_user'] = '%u';
-$config['smtp_pass'] = '%p';
-$config['support_url'] = '';
-$config['product_name'] = 'Webmail';
-$config['des_key'] = 'your_random_string_here';
-$config['plugins'] = array(
-    'archive',
-    'zipdownload',
-    'managesieve'
-);
-$config['skin'] = 'larry';</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">8</span> Initialize Roundcube Database</h3>
-          <p>Import the initial database schema:</p>
-          <div class="command">
-            <pre><code>sudo mysql -u root -p roundcubemail < /usr/share/roundcube/SQL/mysql.initial.sql</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Set proper permissions:</p>
-          <div class="command">
-            <pre><code>sudo chown -R www-data:www-data /var/lib/roundcube/
-sudo chmod -R 755 /var/lib/roundcube/</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">9</span> Configure Apache for Roundcube</h3>
-          <p>Enable Roundcube in Apache:</p>
-          <div class="command">
-            <pre><code>sudo ln -s /etc/roundcube/apache.conf /etc/apache2/conf-available/roundcube.conf
-sudo a2enconf roundcube
-sudo systemctl reload apache2</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">10</span> SSL Certificate Configuration</h3>
-          <p>Install Let's Encrypt certbot:</p>
-          <div class="command">
-            <pre><code>sudo apt install -y certbot python3-certbot-apache</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Obtain an SSL certificate:</p>
-          <div class="command">
-            <pre><code>sudo certbot --apache -d mail.yourdomain.com</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Set up auto-renewal by adding this to crontab:</p>
-          <div class="command">
-            <pre><code>0 12 * * * /usr/bin/certbot renew --quiet</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">11</span> Firewall Configuration</h3>
-          <p>Allow necessary ports through the firewall:</p>
-          <div class="command">
-            <pre><code>sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw allow 25/tcp
-sudo ufw allow 587/tcp
-sudo ufw allow 465/tcp
-sudo ufw allow 993/tcp
-sudo ufw allow 995/tcp
-sudo ufw allow 110/tcp
-sudo ufw allow 143/tcp
-sudo ufw allow 10000/tcp
-sudo ufw enable</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">12</span> Test Email Configuration</h3>
-          <p>Test your email server configuration:</p>
-          <div class="command">
-            <pre><code># Test Postfix configuration
-sudo postfix check
-sudo postfix reload
-
-# Test Dovecot configuration
-sudo doveadm auth test user@yourdomain.com
-
-# Check service status
-sudo systemctl status postfix
-sudo systemctl status dovecot
-sudo systemctl status apache2</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">13</span> Access Web Interfaces</h3>
-          <p>Your mail server is now ready. Access the interfaces:</p>
-          <ul>
-            <li><strong>Virtualmin Admin:</strong> https://your-server-ip:10000</li>
-            <li><strong>Roundcube Webmail:</strong> https://mail.yourdomain.com/roundcube</li>
-            <li><strong>Webmail Alternative:</strong> https://yourdomain.com:10000/webmail</li>
-          </ul>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">14</span> Create Email Accounts</h3>
-          <p>Create email accounts through Virtualmin:</p>
-          <ol>
-            <li>Login to Virtualmin</li>
-            <li>Select your domain</li>
-            <li>Go to "Edit Users" → "Create a new user"</li>
-            <li>Fill in username and password</li>
-            <li>Check "Create email account with username"</li>
-          </ol>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">15</span> Security Hardening</h3>
-          <p>Install and configure Fail2ban for additional security:</p>
-          <div class="command">
-            <pre><code>sudo apt install -y fail2ban</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Create a custom jail configuration:</p>
-          <div class="command">
-            <pre><code>sudo nano /etc/fail2ban/jail.local</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Add these configurations:</p>
-          <div class="command">
-            <pre><code>[postfix]
-enabled = true
-
-[dovecot]
-enabled = true
-
-[roundcube]
-enabled = true</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Enable and start Fail2ban:</p>
-          <div class="command">
-            <pre><code>sudo systemctl enable fail2ban
-sudo systemctl start fail2ban</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">16</span> Regular Maintenance</h3>
-          <p>Create a backup script for regular maintenance:</p>
-          <div class="command">
-            <pre><code>sudo nano /usr/local/bin/backup-mailserver.sh</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Add the following content to the backup script:</p>
-          <div class="command">
-            <pre><code>#!/bin/bash
-# Backup databases
-mysqldump -u root -p your_password roundcubemail > /backup/roundcube-$(date +%Y%m%d).sql
-mysqldump -u root -p your_password mysql > /backup/mysql-$(date +%Y%m%d).sql
-
-# Backup configurations
-tar -czf /backup/mail-config-$(date +%Y%m%d).tar.gz /etc/postfix /etc/dovecot /etc/roundcube
-
-# Backup email data
-tar -czf /backup/vmail-$(date +%Y%m%d).tar.gz /home/vmail
-
-# Clean old backups (keep 30 days)
-find /backup -name "*.sql" -mtime +30 -delete
-find /backup -name "*.tar.gz" -mtime +30 -delete</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Make the script executable and schedule it with cron:</p>
-          <div class="command">
-            <pre><code>sudo chmod +x /usr/local/bin/backup-mailserver.sh
-sudo crontab -e</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Add this line to run the backup daily at 2 AM:</p>
-          <div class="command">
-            <pre><code>0 2 * * * /usr/local/bin/backup-mailserver.sh</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-        
-        <div class="step-section">
-          <h3><span class="step-number">17</span> Troubleshooting Common Issues</h3>
-          <p>Check logs for troubleshooting:</p>
-          <div class="command">
-            <pre><code>tail -f /var/log/mail.log
-tail -f /var/log/dovecot.log</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Test email sending:</p>
-          <div class="command">
-            <pre><code>echo "Test email" | mail -s "Test Subject" your@email.com</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-          <p>Restart services if needed:</p>
-          <div class="command">
-            <pre><code>sudo systemctl restart postfix dovecot apache2</code></pre>
-            <button class="command-copy">Copy</button>
-          </div>
-        </div>
-
-        <div class="tutorial-nav">
-          <a href="#" data-prev="xstream"><i class="fas fa-arrow-left"></i> Previous: XStream Server</a>
-          <a href="#" data-next="radarr">Next: Radarr, Sonarr, Bazarr <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </section>
-
-      <!-- Continue with remaining tutorial sections -->
-      <section id="radarr" class="tutorial-section">
-        <h2>Radarr, Sonarr, Bazarr Setup</h2>
-        <p>Media management applications for automating your media collection.</p>
-        <div class="tutorial-nav">
-          <a href="#" data-prev="virtualmin"><i class="fas fa-arrow-left"></i> Previous: Virtualmin + Roundcube</a>
-          <a href="#" data-next="prowlarr">Next: Prowlarr <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </section>
-
-      <!-- Continue with all remaining sections following the same pattern -->
-
-    </main>
-  </div>
-
-  <div class="success-message" id="copy-success">
-    <i class="fas fa-check-circle"></i> Command copied to clipboard!
+    <div class="projects-grid">
+      <div class="project-card">
+        <a href="dns-server.html">
+          <div class="project-icon">
+            <i class="fas fa-network-wired"></i>
+          </div>
+          <h3>DNS Server on Ubuntu</h3>
+          <p>Set up your own DNS server using BIND9 on Ubuntu for complete control over domain resolution.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 30 min</span>
+            <span><i class="fas fa-level-up-alt"></i> Beginner</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="web-server.html">
+          <div class="project-icon">
+            <i class="fas fa-server"></i>
+          </div>
+          <h3>Web Server</h3>
+          <p>Configure Apache or Nginx web server on Ubuntu with SSL support and virtual hosts.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 45 min</span>
+            <span><i class="fas fa-level-up-alt"></i> Beginner</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="cacti-monitoring.html">
+          <div class="project-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Cacti Monitoring</h3>
+          <p>Install and configure Cacti for network monitoring and performance graphing.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 1 hour</span>
+            <span><i class="fas fa-level-up-alt"></i> Intermediate</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="lancache-server.html">
+          <div class="project-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <h3>Lancache Server</h3>
+          <p>Create a local caching server for game downloads to save bandwidth.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 1.5 hours</span>
+            <span><i class="fas fa-level-up-alt"></i> Advanced</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="issabel-pbx.html">
+          <div class="project-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <h3>Issabel PBX</h3>
+          <p>Set up a complete PBX system for business telephony solutions.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 1 hour</span>
+            <span><i class="fas fa-level-up-alt"></i> Intermediate</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="tv-server-flussonic.html">
+          <div class="project-icon">
+            <i class="fas fa-tv"></i>
+          </div>
+          <h3>TV Server with Flussonic</h3>
+          <p>Build a media streaming server for live TV and video on demand.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 2 hours</span>
+            <span><i class="fas fa-level-up-alt"></i> Advanced</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="xstream-server.html">
+          <div class="project-icon">
+            <i class="fas fa-stream"></i>
+          </div>
+          <h3>XStream Server</h3>
+          <p>Configure an XStream media server for content delivery.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 1.5 hours</span>
+            <span><i class="fas fa-level-up-alt"></i> Advanced</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="virtualmin-roundcube.html">
+          <div class="project-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h3>Virtualmin + Roundcube</h3>
+          <p>Set up a complete mail server with web-based administration and webmail.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 1.5 hours</span>
+            <span><i class="fas fa-level-up-alt"></i> Intermediate</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="radarr-sonarr-bazarr.html">
+          <div class="project-icon">
+            <i class="fas fa-film"></i>
+          </div>
+          <h3>Radarr, Sonarr, Bazarr</h3>
+          <p>Automate your media collection with these powerful management tools.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 1 hour</span>
+            <span><i class="fas fa-level-up-alt"></i> Intermediate</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="prowlarr.html">
+          <div class="project-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>Prowlarr</h3>
+          <p>Manage your indexers for all your automation apps in one place.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 45 min</span>
+            <span><i class="fas fa-level-up-alt"></i> Intermediate</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="qbittorrent.html">
+          <div class="project-icon">
+            <i class="fas fa-download"></i>
+          </div>
+          <h3>qBittorrent</h3>
+          <p>Set up a headless torrent client with web interface for easy management.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 30 min</span>
+            <span><i class="fas fa-level-up-alt"></i> Beginner</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="ansible-automation.html">
+          <div class="project-icon">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <h3>Ansible Automation</h3>
+          <p>Automate server configuration and deployment with Ansible.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 2 hours</span>
+            <span><i class="fas fa-level-up-alt"></i> Advanced</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="docker-kubernetes.html">
+          <div class="project-icon">
+            <i class="fab fa-docker"></i>
+          </div>
+          <h3>Docker & Kubernetes</h3>
+          <p>Containerize your applications and manage them with Kubernetes.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 3 hours</span>
+            <span><i class="fas fa-level-up-alt"></i> Advanced</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="wireguard-vpn.html">
+          <div class="project-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>WireGuard VPN</h3>
+          <p>Set up a fast, modern and secure VPN server using WireGuard.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 45 min</span>
+            <span><i class="fas fa-level-up-alt"></i> Intermediate</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="project-card">
+        <a href="proxmox-ve.html">
+          <div class="project-icon">
+            <i class="fas fa-cloud"></i>
+          </div>
+          <h3>Proxmox VE</h3>
+          <p>Install and configure Proxmox Virtual Environment for server virtualization.</p>
+          <div class="project-meta">
+            <span><i class="fas fa-clock"></i> 1.5 hours</span>
+            <span><i class="fas fa-level-up-alt"></i> Advanced</span>
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
 
   <footer>
     <p>&copy; 2023 LearnLinuxOnline. All rights reserved.</p>
   </footer>
-
-  <script>
-    // Tutorial navigation functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      // Handle sidebar navigation clicks
-      const navLinks = document.querySelectorAll('.project-nav a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          // Remove active class from all links
-          navLinks.forEach(l => l.classList.remove('active'));
-          
-          // Add active class to clicked link
-          this.classList.add('active');
-          
-          // Hide all tutorial sections
-          document.querySelectorAll('.tutorial-section').forEach(section => {
-            section.classList.remove('active');
-          });
-          
-          // Show the selected tutorial section
-          const tutorialId = this.getAttribute('data-tutorial');
-          document.getElementById(tutorialId).classList.add('active');
-        });
-      });
-      
-      // Handle next/previous navigation
-      const nextPrevLinks = document.querySelectorAll('.tutorial-nav a');
-      nextPrevLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          const targetId = this.getAttribute('data-next') || this.getAttribute('data-prev');
-          if (targetId) {
-            // Update sidebar active link
-            navLinks.forEach(l => l.classList.remove('active'));
-            document.querySelector(`.project-nav a[data-tutorial="${targetId}"]`).classList.add('active');
-            
-            // Show the target tutorial section
-            document.querySelectorAll('.tutorial-section').forEach(section => {
-              section.classList.remove('active');
-            });
-            document.getElementById(targetId).classList.add('active');
-            
-            // Scroll to top of the tutorial
-            document.querySelector('.project-details').scrollTop = 0;
-          }
-        });
-      });
-      
-      // Copy button functionality
-      const copyButtons = document.querySelectorAll('.command-copy');
-      copyButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const codeBlock = this.previousElementSibling;
-          const textToCopy = codeBlock.textContent;
-          
-          navigator.clipboard.writeText(textToCopy).then(() => {
-            const successMsg = document.getElementById('copy-success');
-            successMsg.style.display = 'block';
-            setTimeout(() => {
-              successMsg.style.display = 'none';
-            }, 2000);
-          }).catch(err => {
-            console.error('Failed to copy text: ', err);
-          });
-        });
-      });
-    });
-  </script>
 </body>
 </html>
