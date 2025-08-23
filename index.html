@@ -1061,7 +1061,371 @@ chmod +x issabel4-netinstall.sh</code></pre>
         </div>
       </section>
 
-      <!-- Additional tutorial sections would continue here -->
+      <!-- Virtualmin + Roundcube Tutorial -->
+      <section id="virtualmin" class="tutorial-section">
+        <h2>Mail Server with Virtualmin and Roundcube on Ubuntu 20.04 LTS</h2>
+        <p>This tutorial will guide you through setting up a complete mail server using Virtualmin for server administration and Roundcube for webmail access.</p>
+        
+        <div class="prerequisites">
+          <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
+          <ul>
+            <li>Ubuntu 20.04 LTS server</li>
+            <li>Root or sudo access</li>
+            <li>Domain name pointing to your server IP</li>
+            <li>Minimum 2GB RAM recommended</li>
+          </ul>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">1</span> System Update and Preparation</h3>
+          <p>Update your system and install essential packages:</p>
+          <div class="command">
+            <pre><code>sudo apt update && sudo apt upgrade -y
+sudo apt install -y curl wget gnupg2 software-properties-common
+
+# Set hostname (replace with your domain)
+sudo hostnamectl set-hostname mail.yourdomain.com
+
+# Update hosts file
+sudo nano /etc/hosts</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Add this line to your hosts file (replace with your server IP and domain):</p>
+          <div class="command">
+            <pre><code>your_server_ip mail.yourdomain.com mail</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">2</span> Install Virtualmin</h3>
+          <p>Download and run the Virtualmin installation script:</p>
+          <div class="command">
+            <pre><code>wget http://software.virtualmin.com/gpl/scripts/install.sh
+chmod +x install.sh
+sudo ./install.sh</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>During installation, you'll be prompted to:</p>
+          <ul>
+            <li>Press Enter to continue</li>
+            <li>Choose "Y" to continue with the installation</li>
+          </ul>
+          <p>The script will install all required components (Apache, MySQL, Postfix, etc.)</p>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">3</span> Post-Installation Virtualmin Setup</h3>
+          <p>Access the Virtualmin web interface:</p>
+          <div class="command">
+            <pre><code># Open browser and go to:
+https://your-server-ip:10000</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Login with your root credentials. The first time setup wizard will guide you through:</p>
+          <ol>
+            <li>License agreement</li>
+            <li>System configuration</li>
+            <li>Network configuration</li>
+            <li>Server templates</li>
+            <li>Feature configuration</li>
+          </ol>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">4</span> Configure DNS Records</h3>
+          <p>Create these DNS records for your domain:</p>
+          <div class="command">
+            <pre><code>A record: mail.yourdomain.com → your_server_ip
+MX record: yourdomain.com → mail.yourdomain.com
+TXT record: yourdomain.com → v=spf1 a mx ip4:your_server_ip ~all</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <div class="note">
+            <strong>Note:</strong> These DNS changes may take up to 24-48 hours to propagate globally.
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">5</span> Create Virtual Server in Virtualmin</h3>
+          <ol>
+            <li>Login to Virtualmin (https://your-server-ip:10000)</li>
+            <li>Click "Create Virtual Server"</li>
+            <li>Fill in details:
+              <ul>
+                <li>Domain name: yourdomain.com</li>
+                <li>Administration password: set a strong password</li>
+                <li>Email username: admin (or your preferred username)</li>
+                <li>Email password: set email password</li>
+              </ul>
+            </li>
+            <li>Click "Create Server"</li>
+          </ol>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">6</span> Install Roundcube Webmail</h3>
+          <p>Install Roundcube and its dependencies:</p>
+          <div class="command">
+            <pre><code>sudo apt install -y roundcube roundcube-core roundcube-mysql roundcube-plugins</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Configure Roundcube to use MySQL:</p>
+          <div class="command">
+            <pre><code>sudo mysql -u root -p</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>In the MySQL prompt, run these commands:</p>
+          <div class="command">
+            <pre><code>CREATE DATABASE roundcubemail;
+GRANT ALL PRIVILEGES ON roundcubemail.* TO 'roundcube'@'localhost' IDENTIFIED BY 'strong_password';
+FLUSH PRIVILEGES;
+EXIT;</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">7</span> Configure Roundcube</h3>
+          <p>Edit the Roundcube configuration file:</p>
+          <div class="command">
+            <pre><code>sudo nano /etc/roundcube/config.inc.php</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Update the configuration with these settings:</p>
+          <div class="command">
+            <pre><code>$config['db_dsnw'] = 'mysql://roundcube:strong_password@localhost/roundcubemail';
+$config['default_host'] = 'ssl://localhost';
+$config['default_port'] = 993;
+$config['smtp_server'] = 'ssl://localhost';
+$config['smtp_port'] = 465;
+$config['smtp_user'] = '%u';
+$config['smtp_pass'] = '%p';
+$config['support_url'] = '';
+$config['product_name'] = 'Webmail';
+$config['des_key'] = 'your_random_string_here';
+$config['plugins'] = array(
+    'archive',
+    'zipdownload',
+    'managesieve'
+);
+$config['skin'] = 'larry';</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">8</span> Initialize Roundcube Database</h3>
+          <p>Import the initial database schema:</p>
+          <div class="command">
+            <pre><code>sudo mysql -u root -p roundcubemail < /usr/share/roundcube/SQL/mysql.initial.sql</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Set proper permissions:</p>
+          <div class="command">
+            <pre><code>sudo chown -R www-data:www-data /var/lib/roundcube/
+sudo chmod -R 755 /var/lib/roundcube/</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">9</span> Configure Apache for Roundcube</h3>
+          <p>Enable Roundcube in Apache:</p>
+          <div class="command">
+            <pre><code>sudo ln -s /etc/roundcube/apache.conf /etc/apache2/conf-available/roundcube.conf
+sudo a2enconf roundcube
+sudo systemctl reload apache2</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">10</span> SSL Certificate Configuration</h3>
+          <p>Install Let's Encrypt certbot:</p>
+          <div class="command">
+            <pre><code>sudo apt install -y certbot python3-certbot-apache</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Obtain an SSL certificate:</p>
+          <div class="command">
+            <pre><code>sudo certbot --apache -d mail.yourdomain.com</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Set up auto-renewal by adding this to crontab:</p>
+          <div class="command">
+            <pre><code>0 12 * * * /usr/bin/certbot renew --quiet</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">11</span> Firewall Configuration</h3>
+          <p>Allow necessary ports through the firewall:</p>
+          <div class="command">
+            <pre><code>sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 25/tcp
+sudo ufw allow 587/tcp
+sudo ufw allow 465/tcp
+sudo ufw allow 993/tcp
+sudo ufw allow 995/tcp
+sudo ufw allow 110/tcp
+sudo ufw allow 143/tcp
+sudo ufw allow 10000/tcp
+sudo ufw enable</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">12</span> Test Email Configuration</h3>
+          <p>Test your email server configuration:</p>
+          <div class="command">
+            <pre><code># Test Postfix configuration
+sudo postfix check
+sudo postfix reload
+
+# Test Dovecot configuration
+sudo doveadm auth test user@yourdomain.com
+
+# Check service status
+sudo systemctl status postfix
+sudo systemctl status dovecot
+sudo systemctl status apache2</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">13</span> Access Web Interfaces</h3>
+          <p>Your mail server is now ready. Access the interfaces:</p>
+          <ul>
+            <li><strong>Virtualmin Admin:</strong> https://your-server-ip:10000</li>
+            <li><strong>Roundcube Webmail:</strong> https://mail.yourdomain.com/roundcube</li>
+            <li><strong>Webmail Alternative:</strong> https://yourdomain.com:10000/webmail</li>
+          </ul>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">14</span> Create Email Accounts</h3>
+          <p>Create email accounts through Virtualmin:</p>
+          <ol>
+            <li>Login to Virtualmin</li>
+            <li>Select your domain</li>
+            <li>Go to "Edit Users" → "Create a new user"</li>
+            <li>Fill in username and password</li>
+            <li>Check "Create email account with username"</li>
+          </ol>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">15</span> Security Hardening</h3>
+          <p>Install and configure Fail2ban for additional security:</p>
+          <div class="command">
+            <pre><code>sudo apt install -y fail2ban</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Create a custom jail configuration:</p>
+          <div class="command">
+            <pre><code>sudo nano /etc/fail2ban/jail.local</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Add these configurations:</p>
+          <div class="command">
+            <pre><code>[postfix]
+enabled = true
+
+[dovecot]
+enabled = true
+
+[roundcube]
+enabled = true</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Enable and start Fail2ban:</p>
+          <div class="command">
+            <pre><code>sudo systemctl enable fail2ban
+sudo systemctl start fail2ban</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">16</span> Regular Maintenance</h3>
+          <p>Create a backup script for regular maintenance:</p>
+          <div class="command">
+            <pre><code>sudo nano /usr/local/bin/backup-mailserver.sh</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Add the following content to the backup script:</p>
+          <div class="command">
+            <pre><code>#!/bin/bash
+# Backup databases
+mysqldump -u root -p your_password roundcubemail > /backup/roundcube-$(date +%Y%m%d).sql
+mysqldump -u root -p your_password mysql > /backup/mysql-$(date +%Y%m%d).sql
+
+# Backup configurations
+tar -czf /backup/mail-config-$(date +%Y%m%d).tar.gz /etc/postfix /etc/dovecot /etc/roundcube
+
+# Backup email data
+tar -czf /backup/vmail-$(date +%Y%m%d).tar.gz /home/vmail
+
+# Clean old backups (keep 30 days)
+find /backup -name "*.sql" -mtime +30 -delete
+find /backup -name "*.tar.gz" -mtime +30 -delete</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Make the script executable and schedule it with cron:</p>
+          <div class="command">
+            <pre><code>sudo chmod +x /usr/local/bin/backup-mailserver.sh
+sudo crontab -e</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Add this line to run the backup daily at 2 AM:</p>
+          <div class="command">
+            <pre><code>0 2 * * * /usr/local/bin/backup-mailserver.sh</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">17</span> Troubleshooting Common Issues</h3>
+          <p>Check logs for troubleshooting:</p>
+          <div class="command">
+            <pre><code>tail -f /var/log/mail.log
+tail -f /var/log/dovecot.log</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Test email sending:</p>
+          <div class="command">
+            <pre><code>echo "Test email" | mail -s "Test Subject" your@email.com</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Restart services if needed:</p>
+          <div class="command">
+            <pre><code>sudo systemctl restart postfix dovecot apache2</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+
+        <div class="tutorial-nav">
+          <a href="#" data-prev="xstream"><i class="fas fa-arrow-left"></i> Previous: XStream Server</a>
+          <a href="#" data-next="radarr">Next: Radarr, Sonarr, Bazarr <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </section>
+
+      <!-- Continue with remaining tutorial sections -->
+      <section id="radarr" class="tutorial-section">
+        <h2>Radarr, Sonarr, Bazarr Setup</h2>
+        <p>Media management applications for automating your media collection.</p>
+        <div class="tutorial-nav">
+          <a href="#" data-prev="virtualmin"><i class="fas fa-arrow-left"></i> Previous: Virtualmin + Roundcube</a>
+          <a href="#" data-next="prowlarr">Next: Prowlarr <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </section>
+
+      <!-- Continue with all remaining sections following the same pattern -->
 
     </main>
   </div>
