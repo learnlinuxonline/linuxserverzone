@@ -116,6 +116,37 @@
       margin: 0 auto;
     }
     
+    /* Search Box */
+    .search-container {
+      margin: 1.5rem 0;
+      position: relative;
+    }
+    
+    .search-box {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      padding-left: 3rem;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+    }
+    
+    .search-box:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--dark-gray);
+    }
+    
     /* Category Sections */
     .category {
       margin-bottom: 3rem;
@@ -191,6 +222,38 @@
       font-size: 0.9rem;
     }
     
+    /* No results message */
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      background: var(--light);
+      border-radius: 12px;
+      color: var(--dark-gray);
+    }
+    
+    /* Quick filter buttons */
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    
     /* Footer */
     footer {
       background: var(--light);
@@ -223,6 +286,10 @@
       .projects-grid {
         grid-template-columns: 1fr;
       }
+      
+      .filter-buttons {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -243,8 +310,25 @@
       <p>Step-by-step guides to set up and configure various server applications on Linux systems. Perfect for beginners and advanced users alike.</p>
     </div>
     
+    <!-- Search Box -->
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" id="searchInput" class="search-box" placeholder="Search for server projects...">
+    </div>
+    
+    <!-- Quick Filter Buttons -->
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="beginner">Beginner</button>
+      <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+      <button class="filter-btn" data-filter="advanced">Advanced</button>
+      <button class="filter-btn" data-filter="database">Database</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="monitoring">Monitoring</button>
+    </div>
+    
     <!-- Web Servers Category -->
-    <div class="category">
+    <div class="category" data-category="web">
       <div class="category-header">
         <div class="category-icon">
           <i class="fas fa-server"></i>
@@ -253,7 +337,7 @@
       </div>
       
       <div class="projects-grid">
-        <div class="project-card">
+        <div class="project-card" data-difficulty="beginner" data-tags="web server apache nginx">
           <a href="web-server.html">
             <div class="project-icon">
               <i class="fas fa-server"></i>
@@ -267,7 +351,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="advanced" data-tags="media streaming">
           <a href="xstream-server.html">
             <div class="project-icon">
               <i class="fas fa-stream"></i>
@@ -281,7 +365,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="advanced" data-tags="media tv streaming">
           <a href="tv-server-flussonic.html">
             <div class="project-icon">
               <i class="fas fa-tv"></i>
@@ -298,7 +382,7 @@
     </div>
     
     <!-- Database Servers Category -->
-    <div class="category">
+    <div class="category" data-category="database">
       <div class="category-header">
         <div class="category-icon">
           <i class="fas fa-database"></i>
@@ -307,7 +391,7 @@
       </div>
       
       <div class="projects-grid">
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="database mysql mariadb">
           <a href="MySQL-MariaDB.html">
             <div class="project-icon">
               <i class="fas fa-database"></i>
@@ -321,7 +405,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="database postgresql">
           <a href="PostgreSQL.html">
             <div class="project-icon">
               <i class="fas fa-database"></i>
@@ -335,7 +419,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="database mongodb nosql">
           <a href="MongoDB.html">
             <div class="project-icon">
               <i class="fas fa-database"></i>
@@ -349,7 +433,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="database redis cache">
           <a href="Redis-Server.html">
             <div class="project-icon">
               <i class="fas fa-database"></i>
@@ -366,7 +450,7 @@
     </div>
     
     <!-- Network Services Category -->
-    <div class="category">
+    <div class="category" data-category="network">
       <div class="category-header">
         <div class="category-icon">
           <i class="fas fa-network-wired"></i>
@@ -375,7 +459,7 @@
       </div>
       
       <div class="projects-grid">
-        <div class="project-card">
+        <div class="project-card" data-difficulty="beginner" data-tags="dns network">
           <a href="dns-server.html">
             <div class="project-icon">
               <i class="fas fa-network-wired"></i>
@@ -389,7 +473,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="beginner" data-tags="ntp time network">
           <a href="NTP.html">
             <div class="project-icon">
               <i class="fas fa-clock"></i>
@@ -403,7 +487,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="vpn security network">
           <a href="wireguard-vpn.html">
             <div class="project-icon">
               <i class="fas fa-shield-alt"></i>
@@ -417,7 +501,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="advanced" data-tags="cache network gaming">
           <a href="lancache-server.html">
             <div class="project-icon">
               <i class="fas fa-database"></i>
@@ -434,7 +518,7 @@
     </div>
     
     <!-- File Services Category -->
-    <div class="category">
+    <div class="category" data-category="storage">
       <div class="category-header">
         <div class="category-icon">
           <i class="fas fa-file-alt"></i>
@@ -443,7 +527,7 @@
       </div>
       
       <div class="projects-grid">
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="file sharing samba windows">
           <a href="Samba.html">
             <div class="project-icon">
               <i class="fas fa-network-wired"></i>
@@ -457,7 +541,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="file sharing nfs linux">
           <a href="NFS-Server.html">
             <div class="project-icon">
               <i class="fas fa-share-alt"></i>
@@ -471,7 +555,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="beginner" data-tags="ftp file transfer">
           <a href="vsftpd.html">
             <div class="project-icon">
               <i class="fas fa-file-upload"></i>
@@ -485,7 +569,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="beginner" data-tags="sftp secure file transfer">
           <a href="SFTP.html">
             <div class="project-icon">
               <i class="fas fa-lock"></i>
@@ -502,7 +586,7 @@
     </div>
     
     <!-- Monitoring & Management Category -->
-    <div class="category">
+    <div class="category" data-category="monitoring">
       <div class="category-header">
         <div class="category-icon">
           <i class="fas fa-chart-line"></i>
@@ -511,7 +595,7 @@
       </div>
       
       <div class="projects-grid">
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="monitoring cacti network">
           <a href="cacti-monitoring.html">
             <div class="project-icon">
               <i class="fas fa-chart-line"></i>
@@ -525,7 +609,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="advanced" data-tags="monitoring zabbix enterprise">
           <a href="Zabbix.html">
             <div class="project-icon">
               <i class="fas fa-tachometer-alt"></i>
@@ -539,7 +623,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="advanced" data-tags="monitoring nagios system">
           <a href="Linux-System-Monitoring-Nagios.html">
             <div class="project-icon">
               <i class="fas fa-heartbeat"></i>
@@ -553,7 +637,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="advanced" data-tags="automation ansible configuration">
           <a href="ansible-automation.html">
             <div class="project-icon">
               <i class="fas fa-cogs"></i>
@@ -570,7 +654,7 @@
     </div>
     
     <!-- Identity & Authentication Category -->
-    <div class="category">
+    <div class="category" data-category="security">
       <div class="category-header">
         <div class="category-icon">
           <i class="fas fa-user-lock"></i>
@@ -579,7 +663,7 @@
       </div>
       
       <div class="projects-grid">
-        <div class="project-card">
+        <div class="project-card" data-difficulty="advanced" data-tags="authentication freeipa identity">
           <a href="FreeIPA.html">
             <div class="project-icon">
               <i class="fas fa-address-card"></i>
@@ -593,7 +677,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="ldap directory authentication">
           <a href="LDAP-Server.html">
             <div class="project-icon">
               <i class="fas fa-address-book"></i>
@@ -610,7 +694,7 @@
     </div>
     
     <!-- Communication Services Category -->
-    <div class="category">
+    <div class="category" data-category="communication">
       <div class="category-header">
         <div class="category-icon">
           <i class="fas fa-comments"></i>
@@ -619,7 +703,7 @@
       </div>
       
       <div class="projects-grid">
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="pbx telephony voip">
           <a href="issabel-pbx.html">
             <div class="project-icon">
               <i class="fas fa-phone-alt"></i>
@@ -633,7 +717,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="email mail server">
           <a href="virtualmin-roundcube.html">
             <div class="project-icon">
               <i class="fas fa-envelope"></i>
@@ -650,7 +734,7 @@
     </div>
     
     <!-- Media & Entertainment Category -->
-    <div class="category">
+    <div class="category" data-category="media">
       <div class="category-header">
         <div class="category-icon">
           <i class="fas fa-film"></i>
@@ -659,7 +743,7 @@
       </div>
       
       <div class="projects-grid">
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="media automation radarr sonarr">
           <a href="radarr-sonarr-bazarr.html">
             <div class="project-icon">
               <i class="fas fa-film"></i>
@@ -673,7 +757,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="intermediate" data-tags="media indexer prowlarr">
           <a href="prowlarr.html">
             <div class="project-icon">
               <i class="fas fa-search"></i>
@@ -687,7 +771,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="beginner" data-tags="torrent download">
           <a href="qbittorrent.html">
             <div class="project-icon">
               <i class="fas fa-download"></i>
@@ -704,7 +788,7 @@
     </div>
     
     <!-- Virtualization & Backup Category -->
-    <div class="category">
+    <div class="category" data-category="virtualization">
       <div class="category-header">
         <div class="category-icon">
           <i class="fas fa-cloud"></i>
@@ -713,7 +797,7 @@
       </div>
       
       <div class="projects-grid">
-        <div class="project-card">
+        <div class="project-card" data-difficulty="advanced" data-tags="virtualization proxmox">
           <a href="proxmox-ve.html">
             <div class="project-icon">
               <i class="fas fa-cloud"></i>
@@ -727,7 +811,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="advanced" data-tags="docker kubernetes containers">
           <a href="docker-kubernetes.html">
             <div class="project-icon">
               <i class="fab fa-docker"></i>
@@ -741,7 +825,7 @@
           </a>
         </div>
         
-        <div class="project-card">
+        <div class="project-card" data-difficulty="advanced" data-tags="backup bacula">
           <a href="Bacula.html">
             <div class="project-icon">
               <i class="fas fa-hdd"></i>
@@ -761,5 +845,141 @@
   <footer>
     <p>&copy; 2023 LearnLinuxOnline. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Search functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('searchInput');
+      const projectCards = document.querySelectorAll('.project-card');
+      const categories = document.querySelectorAll('.category');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      
+      // Search function
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        let visibleCards = 0;
+        
+        projectCards.forEach(card => {
+          const title = card.querySelector('h3').textContent.toLowerCase();
+          const description = card.querySelector('p').textContent.toLowerCase();
+          const tags = card.getAttribute('data-tags').toLowerCase();
+          
+          if (title.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm)) {
+            card.style.display = 'block';
+            visibleCards++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Show/hide categories based on visible cards
+        categories.forEach(category => {
+          const categoryCards = category.querySelectorAll('.project-card');
+          let visibleCategoryCards = 0;
+          
+          categoryCards.forEach(card => {
+            if (card.style.display !== 'none') {
+              visibleCategoryCards++;
+            }
+          });
+          
+          if (visibleCategoryCards > 0) {
+            category.style.display = 'block';
+          } else {
+            category.style.display = 'none';
+          }
+        });
+        
+        // Show no results message if no cards are visible
+        const noResults = document.getElementById('noResults');
+        if (visibleCards === 0 && searchTerm !== '') {
+          if (!noResults) {
+            const noResultsMsg = document.createElement('div');
+            noResultsMsg.id = 'noResults';
+            noResultsMsg.className = 'no-results';
+            noResultsMsg.innerHTML = `
+              <i class="fas fa-search fa-2x" style="margin-bottom: 1rem;"></i>
+              <h3>No projects found</h3>
+              <p>Try different search terms or browse using the category filters.</p>
+            `;
+            document.querySelector('.main-content').appendChild(noResultsMsg);
+          }
+        } else if (noResults) {
+          noResults.remove();
+        }
+      });
+      
+      // Filter buttons functionality
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const filter = this.getAttribute('data-filter');
+          
+          // Update active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Clear search input
+          searchInput.value = '';
+          
+          // Show all categories and cards first
+          categories.forEach(category => category.style.display = 'block');
+          projectCards.forEach(card => card.style.display = 'block');
+          
+          // Remove any existing no results message
+          const noResults = document.getElementById('noResults');
+          if (noResults) noResults.remove();
+          
+          // Apply filter
+          if (filter !== 'all') {
+            let visibleCards = 0;
+            
+            projectCards.forEach(card => {
+              const difficulty = card.getAttribute('data-difficulty');
+              const category = card.parentElement.parentElement.getAttribute('data-category');
+              
+              if (filter === difficulty || filter === category) {
+                card.style.display = 'block';
+                visibleCards++;
+              } else {
+                card.style.display = 'none';
+              }
+            });
+            
+            // Show/hide categories based on visible cards
+            categories.forEach(category => {
+              const categoryCards = category.querySelectorAll('.project-card');
+              let visibleCategoryCards = 0;
+              
+              categoryCards.forEach(card => {
+                if (card.style.display !== 'none') {
+                  visibleCategoryCards++;
+                }
+              });
+              
+              if (visibleCategoryCards > 0) {
+                category.style.display = 'block';
+              } else {
+                category.style.display = 'none';
+              }
+            });
+            
+            // Show no results message if no cards match the filter
+            if (visibleCards === 0) {
+              const noResultsMsg = document.createElement('div');
+              noResultsMsg.id = 'noResults';
+              noResultsMsg.className = 'no-results';
+              noResultsMsg.innerHTML = `
+                <i class="fas fa-filter fa-2x" style="margin-bottom: 1rem;"></i>
+                <h3>No projects match this filter</h3>
+                <p>Try selecting a different filter or browse all projects.</p>
+              `;
+              document.querySelector('.main-content').appendChild(noResultsMsg);
+            }
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
