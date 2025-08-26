@@ -15,6 +15,7 @@
       --dark-gray: #64748b;
       --text: #334155;
       --text-dark: #1e293b;
+      --accent: #f59e0b;
     }
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light-gray); color: var(--text); margin: 0; }
     header { background: var(--light); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -39,6 +40,48 @@
     .btn-details { background: var(--medium-gray); color: var(--text-dark); }
     .btn-details:hover { background: var(--dark-gray); color: #fff; }
     footer { background: var(--light); text-align: center; padding: 1.5rem; margin-top: 3rem; border-top: 1px solid var(--medium-gray); color: var(--dark-gray); }
+    
+    /* Subscription prompt */
+    .subscription-prompt {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+    .subscription-prompt h3 {
+      color: var(--accent);
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .subscription-prompt p {
+      margin-bottom: 1rem;
+    }
+    .btn-subscribe {
+      background: var(--accent);
+      color: white;
+      font-weight: bold;
+    }
+    .btn-subscribe:hover {
+      background: #fbbf24;
+    }
+    
+    /* Limited content notice */
+    .limited-content {
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      font-style: italic;
+      color: var(--dark-gray);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -54,19 +97,25 @@
 
   <div class="courses-container">
     <h1>Available Courses</h1>
+    
+    <div class="subscription-prompt">
+      <h3><i class="fas fa-crown"></i> Premium Content</h3>
+      <p>You're viewing limited content. Subscribe to access full tutorials with step-by-step instructions!</p>
+      <a href="subscribe.html" class="btn btn-subscribe"><i class="fas fa-star"></i> Subscribe Now</a>
+    </div>
 
     <div class="course">
       <div class="course-header">
         <h2><i class="fas fa-server"></i> Web Server</h2>
-        <p class="price">Price: 499 Taka</p>
+        <p class="price">Price: 399 Taka</p>
+      </div>
+      <div class="limited-content">
+        <i class="fas fa-info-circle"></i> Basic content shown - subscribe for full tutorial
       </div>
       <ul>
         <li><i class="fas fa-globe"></i> Web Server Apache/Nginx</li>
         <li><i class="fas fa-network-wired"></i> FTP Vsftpd</li>
         <li><i class="fas fa-hdd"></i> NFS</li>
-        <li><i class="fas fa-share-alt"></i> Samba</li>
-        <li><i class="fas fa-database"></i> iSCSI Server</li>
-        <li><i class="fas fa-clock"></i> NTP Server</li>
       </ul>
       <div class="btn-group">
         <a href="buy.html" class="btn btn-buy"><i class="fas fa-shopping-cart"></i> Buy Now</a>
@@ -77,7 +126,10 @@
     <div class="course">
       <div class="course-header">
         <h2><i class="fas fa-envelope"></i> Web, DNS and Mail Server</h2>
-        <p class="price">Price: 499 Taka</p>
+        <p class="price">Price: 500 Taka</p>
+      </div>
+      <div class="limited-content">
+        <i class="fas fa-info-circle"></i> Basic content shown - subscribe for full tutorial
       </div>
       <ul>
         <li><i class="fas fa-globe"></i> Web Server Apache/Nginx</li>
@@ -93,16 +145,15 @@
     <div class="course">
       <div class="course-header">
         <h2><i class="fas fa-cogs"></i> Automation & Streaming</h2>
-        <p class="price">Price: 1000 Taka</p>
+        <p class="price">Price: 599 Taka</p>
+      </div>
+      <div class="limited-content">
+        <i class="fas fa-info-circle"></i> Basic content shown - subscribe for full tutorial
       </div>
       <ul>
         <li><i class="fas fa-robot"></i> Automation with Radarr, Sonarr, Bazarr, Prowlarr</li>
         <li><i class="fas fa-download"></i> qBittorrent</li>
         <li><i class="fas fa-cloud-download-alt"></i> FreeDownloader</li>
-        <li><i class="fas fa-video"></i> Flussonic</li>
-        <li><i class="fas fa-play-circle"></i> Xtream UI</li>
-        <li><i class="fas fa-desktop"></i> XUI.one</li>
-        <li><i class="fas fa-project-diagram"></i> O11 v4</li>
       </ul>
       <div class="btn-group">
         <a href="buy.html" class="btn btn-buy"><i class="fas fa-shopping-cart"></i> Buy Now</a>
@@ -113,21 +164,26 @@
     <div class="course">
       <div class="course-header">
         <h2><i class="fas fa-hdd"></i> Lancache Server</h2>
-        <p class="price">Price: 1000 Taka</p>
+        <p class="price">Price: 699 Taka</p>
+      </div>
+      <div class="limited-content">
+        <i class="fas fa-info-circle"></i> Basic content shown - subscribe for full tutorial
       </div>
       <ul>
         <li><i class="fas fa-download"></i> Lancache installation and configuration</li>
         <li><i class="fas fa-sitemap"></i> DNS setup for caching</li>
         <li><i class="fab fa-steam"></i> Steam content caching</li>
-        <li><i class="fab fa-windows"></i> Windows Update caching</li>
-        <li><i class="fas fa-gamepad"></i> Game client caching (Steam, Epic, Blizzard, Riot, battlenet, Xbox)</li>
-        <li><i class="fas fa-database"></i> Multiple cache disk configuration</li>
-        <li><i class="fas fa-chart-line"></i> Monitoring and optimization</li>
       </ul>
       <div class="btn-group">
         <a href="buy.html" class="btn btn-buy"><i class="fas fa-shopping-cart"></i> Buy Now</a>
         <a href="#" class="btn btn-details"><i class="fas fa-info-circle"></i> Details</a>
       </div>
+    </div>
+    
+    <div class="subscription-prompt">
+      <h3><i class="fas fa-unlock"></i> Unlock All Content</h3>
+      <p>Subscribe to get full access to all tutorials with detailed step-by-step instructions!</p>
+      <a href="subscribe.html" class="btn btn-subscribe"><i class="fas fa-star"></i> Subscribe Now</a>
     </div>
   </div>
 
