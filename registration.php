@@ -2,11 +2,11 @@
 // Load environment variables from .env
 $env = parse_ini_file(__DIR__.'/.env');
 
-$host = $env['DB_HOST'];
-$port = $env['DB_PORT'];
-$dbname = $env['DB_NAME'];
-$user = $env['DB_USER'];
-$password = $env['DB_PASS'];
+DB_HOST=dpg-d2pc3qer433s73d46ca0-a.singapore-postgres.render.com
+DB_PORT=5432
+DB_NAME=sqllearnlinuxonline
+DB_USER=ali
+DB_PASS=balklLca9SLjetdUpRHA6qZWztJTsVmY
 
 // Connect to PostgreSQL
 $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password sslmode=require");
