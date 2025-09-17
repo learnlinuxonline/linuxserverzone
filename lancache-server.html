@@ -20,6 +20,9 @@
             --accent: #f59e0b;
             --success: #10b981;
             --danger: #ef4444;
+            --facebook: #3b5998;
+            --whatsapp: #25D366;
+            --telegram: #0088cc;
         }
         
         * {
@@ -92,6 +95,7 @@
             color: white;
             padding: 3rem 0;
             text-align: center;
+            position: relative;
         }
         
         .hero h1 {
@@ -103,6 +107,44 @@
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
+        }
+        
+        .share-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .share-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: transform 0.3s, opacity 0.3s;
+            cursor: pointer;
+        }
+        
+        .share-btn:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+        
+        .facebook {
+            background-color: var(--facebook);
+        }
+        
+        .whatsapp {
+            background-color: var(--whatsapp);
+        }
+        
+        .telegram {
+            background-color: var(--telegram);
         }
         
         .main-content {
@@ -308,6 +350,18 @@
             margin-top: 3rem;
         }
         
+        .footer-share {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .footer-share .share-btn {
+            position: static;
+            margin: 0 5px;
+        }
+        
         @media (max-width: 900px) {
             .main-content {
                 grid-template-columns: 1fr;
@@ -330,6 +384,12 @@
             
             nav li {
                 margin: 0 0.5rem;
+            }
+            
+            .share-buttons {
+                position: static;
+                justify-content: center;
+                margin-top: 1.5rem;
             }
         }
         
@@ -395,6 +455,16 @@
         .btn-secondary:hover {
             background: var(--text);
         }
+        
+        .floating-share {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
@@ -418,6 +488,30 @@
         <div class="container">
             <h1>Complete Lancache Server Setup & Management</h1>
             <p>Learn how to install, configure, maintain, and monitor a Lancache server on Ubuntu 20.04 LTS</p>
+            
+            <div class="share-buttons">
+                <div class="share-btn facebook" onclick="shareOnFacebook()">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="share-btn telegram" onclick="shareOnTelegram()">
+                    <i class="fab fa-telegram-plane"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-share">
+        <div class="share-btn facebook" onclick="shareOnFacebook()">
+            <i class="fab fa-facebook-f"></i>
+        </div>
+        <div class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="share-btn telegram" onclick="shareOnTelegram()">
+            <i class="fab fa-telegram-plane"></i>
         </div>
     </div>
 
@@ -434,6 +528,21 @@
                 <li><a href="#monitoring"><i class="fas fa-chart-line"></i> Monitoring</a></li>
                 <li><a href="#troubleshooting"><i class="fas fa-bug"></i> Troubleshooting</a></li>
             </ul>
+            
+            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--medium-gray);">
+                <h3>Share This Guide</h3>
+                <div style="display: flex; gap: 10px; margin-top: 1rem;">
+                    <div class="share-btn facebook" onclick="shareOnFacebook()">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="share-btn telegram" onclick="shareOnTelegram()">
+                        <i class="fab fa-telegram-plane"></i>
+                    </div>
+                </div>
+            </div>
         </aside>
 
         <main class="content">
@@ -441,6 +550,18 @@
                 <h2>Introduction to Lancache</h2>
                 <p>Lancache is a caching proxy specifically designed for caching game downloads from services like Steam, Origin, Battle.net, Epic Games, and others. It can significantly reduce bandwidth usage in environments with multiple gamers.</p>
                 <p>This guide will walk you through the complete process of setting up, configuring, maintaining, and monitoring a Lancache server on Ubuntu 20.04 LTS.</p>
+                
+                <div style="margin-top: 1.5rem; display: flex; gap: 10px;">
+                    <div class="share-btn facebook" onclick="shareOnFacebook()">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="share-btn telegram" onclick="shareOnTelegram()">
+                        <i class="fab fa-telegram-plane"></i>
+                    </div>
+                </div>
             </section>
 
             <section id="prerequisites" class="section">
@@ -984,6 +1105,18 @@ docker-compose up -d</code></pre>
     <footer>
         <div class="container">
             <p>© 2023 Lancache Server Setup Guide | Created with <i class="fas fa-heart"></i> for gaming communities</p>
+            
+            <div class="footer-share">
+                <div class="share-btn facebook" onclick="shareOnFacebook()">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="share-btn telegram" onclick="shareOnTelegram()">
+                    <i class="fab fa-telegram-plane"></i>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -1027,6 +1160,25 @@ docker-compose up -d</code></pre>
                 }
             });
         });
+
+        // Social sharing functions
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${title}`, '_blank');
+        }
+
+        function shareOnWhatsApp() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent('Check out this Lancache Server Setup Guide: ');
+            window.open(`https://wa.me/?text=${text}${url}`, '_blank');
+        }
+
+        function shareOnTelegram() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            window.open(`https://t.me/share/url?url=${url}&text=${title}`, '_blank');
+        }
     </script>
 </body>
 </html>
