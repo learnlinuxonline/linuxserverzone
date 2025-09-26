@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zimbra Mail Server Installation - LearnLinuxOnline</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Improved Light Color Scheme and Typography */
+    :root {
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --secondary: #059669;
+      --light: #ffffff;
+      --light-gray: #f8fafc;
+      --medium-gray: #e2e8f0;
+      --dark-gray: #64748b;
+      --text: #334155;
+      --text-dark: #1e293b;
+      --border: #cbd5e1;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--light-gray);
+    }
+    
+    /* Header Styles */
+    header {
+      background: var(--light);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: color 0.3s;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    nav a.active {
+      color: var(--primary);
+    }
+    
+    nav a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px;
+    }
+    
+    /* Breadcrumb */
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 1rem auto 0;
+      padding: 0 1.5rem;
+      font-size: 0.9rem;
+      color: var(--dark-gray);
+    }
+    
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Main Content Layout */
+    .project-content {
+      max-width: 1200px;
+      margin: 1rem auto 2rem;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 2rem;
+    }
+    
+    /* Sidebar Navigation */
+    .project-nav {
+      background: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+    }
+    
+    .project-nav h3 {
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 2px solid var(--medium-gray);
+      font-size: 1.3rem;
+    }
+    
+    .project-nav ul {
+      list-style: none;
+    }
+    
+    .project-nav li {
+      margin: 0.8rem 0;
+    }
+    
+    .project-nav a {
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.7rem;
+      border-radius: 8px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    
+    .project-nav a:hover {
+      background: var(--primary-light);
+      color: white;
+    }
+    
+    .project-nav a.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Main Content Area */
+    .project-details {
+      background: var(--light);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    .project-details h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    
+    .project-details p {
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+    
+    /* Section Styles */
+    .prerequisites {
+      background: var(--light-gray);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      border-left: 4px solid var(--accent);
+    }
+    
+    .prerequisites h3 {
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    
+    .prerequisites ul {
+      padding-left: 1.5rem;
+      margin-bottom: 0;
+    }
+    
+    .prerequisites li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .step-section {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--medium-gray);
+    }
+    
+    .step-section h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .step-section h3 .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+    }
+    
+    /* Code Blocks */
+    pre {
+      background: var(--light-gray);
+      padding: 1.2rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.2rem 0;
+      border: 1px solid var(--medium-gray);
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    code {
+      color: var(--secondary);
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.95rem;
+    }
+    
+    /* Note Box */
+    .note {
+      background: #fffbeb;
+      padding: 1.2rem;
+      border-radius: 8px;
+      margin: 1.2rem 0;
+      border-left: 4px solid var(--accent);
+    }
+    
+    .note strong {
+      color: var(--accent);
+    }
+    
+    /* Warning Box */
+    .warning {
+      background: #fef2f2;
+      padding: 1.2rem;
+      border-radius: 8px;
+      margin: 1.2rem 0;
+      border-left: 4px solid var(--danger);
+    }
+    
+    .warning strong {
+      color: var(--danger);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--light);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--medium-gray);
+      color: var(--dark-gray);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .project-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .project-nav {
+        position: static;
+        margin-bottom: 1.5rem;
+      }
+      
+      header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+      }
+      
+      nav {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .project-content {
+        padding: 0 1rem;
+      }
+      
+      .project-details, .project-nav {
+        padding: 1.2rem;
+      }
+      
+      .project-details h2 {
+        font-size: 1.5rem;
+      }
+    }
+    
+    /* Additional Styling */
+    .command {
+      position: relative;
+    }
+    
+    .command-copy {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: var(--primary-light);
+      color: white;
+      border: none;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: background 0.3s;
+    }
+    
+    .command-copy:hover {
+      background: var(--primary);
+    }
+    
+    .success-message {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--success);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: none;
+      z-index: 1000;
+    }
+    
+    /* Tutorial navigation */
+    .tutorial-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--medium-gray);
+    }
+    
+    .tutorial-nav a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .tutorial-nav a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Tabs for Ubuntu/RHEL */
+    .tabs {
+      display: flex;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--medium-gray);
+    }
+    
+    .tab {
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+    
+    .tab.active {
+      color: var(--primary);
+      border-bottom: 3px solid var(--primary);
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">LearnLinuxOnline</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="courses.html">Courses</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> &raquo; <a href="mail-servers.html">Mail Servers</a> &raquo; Zimbra Mail Server
+  </div>
+
+  <div class="project-content">
+    <aside class="project-nav">
+      <h3>Server Projects</h3>
+      <ul>
+        <li><a href="dns-server.html"><i class="fas fa-network-wired"></i> DNS Server on Ubuntu</a></li>
+        <li><a href="web-server.html"><i class="fas fa-server"></i> Web Server</a></li>
+        <li><a href="phpmyadmin-setup.html"><i class="fas fa-database"></i> phpMyAdmin Setup</a></li>
+        <li><a href="zimbra-mail-server.html" class="active"><i class="fas fa-envelope"></i> Zimbra Mail Server</a></li>
+        <li><a href="cacti-monitoring.html"><i class="fas fa-chart-line"></i> Cacti Monitoring</a></li>
+        <li><a href="lancache-server.html"><i class="fas fa-database"></i> Lancache Server</a></li>
+        <li><a href="issabel-pbx.html"><i class="fas fa-phone-alt"></i> Issabel PBX</a></li>
+        <li><a href="virtualmin-roundcube.html"><i class="fas fa-envelope"></i> Virtualmin + Roundcube</a></li>
+        <li><a href="radarr-sonarr-bazarr.html"><i class="fas fa-film"></i> Radarr, Sonarr, Bazarr</a></li>
+        <li><a href="prowlarr.html"><i class="fas fa-search"></i> Prowlarr</a></li>
+        <li><a href="qbittorrent.html"><i class="fas fa-download"></i> qBittorrent</a></li>
+        <li><a href="ansible-automation.html"><i class="fas fa-cogs"></i> Ansible Automation</a></li>
+        <li><a href="docker-kubernetes.html"><i class="fab fa-docker"></i> Docker & Kubernetes</a></li>
+        <li><a href="wireguard-vpn.html"><i class="fas fa-shield-alt"></i> WireGuard VPN</a></li>
+        <li><a href="proxmox-ve.html"><i class="fas fa-cloud"></i> Proxmox VE</a></li>
+      </ul>
+    </aside>
+
+    <main class="project-details">
+      <h2>Zimbra Mail Server Installation for Ubuntu and RHEL</h2>
+      <p>Zimbra is a popular open-source email server and collaboration suite. This guide will walk you through installing Zimbra on both Ubuntu and RHEL-based systems.</p>
+      
+      <div class="prerequisites">
+        <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
+        <ul>
+          <li>Ubuntu 20.04/22.04 LTS or RHEL 8/Rocky Linux 8/AlmaLinux 8</li>
+          <li>Minimum 4GB RAM (8GB recommended for production)</li>
+          <li>At least 20GB of free disk space</li>
+          <li>Static IP address configured</li>
+          <li>Fully Qualified Domain Name (FQDN) pointing to your server</li>
+          <li>Root or sudo privileges</li>
+        </ul>
+      </div>
+      
+      <div class="tabs">
+        <div class="tab active" data-tab="ubuntu">Ubuntu</div>
+        <div class="tab" data-tab="rhel">RHEL/CentOS/Rocky</div>
+      </div>
+      
+      <div class="tab-content active" id="ubuntu-content">
+        <div class="step-section">
+          <h3><span class="step-number">1</span> System Preparation (Ubuntu)</h3>
+          <p>Update your system and install required dependencies:</p>
+          <div class="command">
+            <pre><code>sudo apt update && sudo apt upgrade -y
+sudo apt install dnsutils net-tools sudo curl wget unzip -y</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Set the hostname and update /etc/hosts:</p>
+          <div class="command">
+            <pre><code>sudo hostnamectl set-hostname mail.yourdomain.com
+echo "127.0.0.1 mail.yourdomain.com" | sudo tee -a /etc/hosts
+echo "<your_server_ip> mail.yourdomain.com" | sudo tee -a /etc/hosts</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <div class="note">
+            <strong>Note:</strong> Replace "mail.yourdomain.com" with your actual domain and <your_server_ip> with your server's IP address.
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">2</span> Download Zimbra (Ubuntu)</h3>
+          <p>Download the latest Zimbra Open Source Edition:</p>
+          <div class="command">
+            <pre><code>wget https://files.zimbra.com/downloads/10.0.0_GA/zimbra-10.0.0_GA_4604.UBUNTU20_64.20230331160356.tgz</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Extract the downloaded file:</p>
+          <div class="command">
+            <pre><code>tar -xzf zimbra-10.0.0_GA_4604.UBUNTU20_64.20230331160356.tgz</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <div class="note">
+            <strong>Note:</strong> Check the <a href="https://www.zimbra.com/downloads/zimbra-collaboration-open-source/" target="_blank">Zimbra downloads page</a> for the latest version.
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">3</span> Install Zimbra (Ubuntu)</h3>
+          <p>Navigate to the extracted directory and run the installer:</p>
+          <div class="command">
+            <pre><code>cd zcs-10.0.0_GA_4604.UBUNTU20_64.20230331160356
+sudo ./install.sh</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>The installer will check system prerequisites. Press <strong>Y</strong> to accept the license agreement.</p>
+          <p>When prompted to select packages to install, choose:</p>
+          <div class="command">
+            <pre><code>3 - Yes (to apply the configuration)</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Wait for the installation to complete. This may take several minutes.</p>
+        </div>
+      </div>
+      
+      <div class="tab-content" id="rhel-content">
+        <div class="step-section">
+          <h3><span class="step-number">1</span> System Preparation (RHEL/Rocky/AlmaLinux)</h3>
+          <p>Update your system and install required dependencies:</p>
+          <div class="command">
+            <pre><code>sudo dnf update -y
+sudo dnf install epel-release -y
+sudo dnf install dnsutils net-tools sudo curl wget unzip perl -y</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Set the hostname and update /etc/hosts:</p>
+          <div class="command">
+            <pre><code>sudo hostnamectl set-hostname mail.yourdomain.com
+echo "127.0.0.1 mail.yourdomain.com" | sudo tee -a /etc/hosts
+echo "<your_server_ip> mail.yourdomain.com" | sudo tee -a /etc/hosts</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Disable SELinux (required for Zimbra):</p>
+          <div class="command">
+            <pre><code>sudo setenforce 0
+sudo sed -i 's/^SELINUX=.*/SELINUX=permissive/' /etc/selinux/config</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">2</span> Download Zimbra (RHEL/Rocky/AlmaLinux)</h3>
+          <p>Download the latest Zimbra Open Source Edition for RHEL 8:</p>
+          <div class="command">
+            <pre><code>wget https://files.zimbra.com/downloads/10.0.0_GA/zimbra-10.0.0_GA_4604.RHEL8_64.20230331160356.tgz</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Extract the downloaded file:</p>
+          <div class="command">
+            <pre><code>tar -xzf zimbra-10.0.0_GA_4604.RHEL8_64.20230331160356.tgz</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <div class="note">
+            <strong>Note:</strong> Check the <a href="https://www.zimbra.com/downloads/zimbra-collaboration-open-source/" target="_blank">Zimbra downloads page</a> for the latest version.
+          </div>
+        </div>
+        
+        <div class="step-section">
+          <h3><span class="step-number">3</span> Install Zimbra (RHEL/Rocky/AlmaLinux)</h3>
+          <p>Navigate to the extracted directory and run the installer:</p>
+          <div class="command">
+            <pre><code>cd zcs-10.0.0_GA_4604.RHEL8_64.20230331160356
+sudo ./install.sh</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>The installer will check system prerequisites. Press <strong>Y</strong> to accept the license agreement.</p>
+          <p>When prompted to select packages to install, choose:</p>
+          <div class="command">
+            <pre><code>3 - Yes (to apply the configuration)</code></pre>
+            <button class="command-copy">Copy</button>
+          </div>
+          <p>Wait for the installation to complete. This may take several minutes.</p>
+        </div>
+      </div>
+      
+      <div class="step-section">
+        <h3><span class="step-number">4</span> Configure Zimbra</h3>
+        <p>After installation, you'll need to configure Zimbra. Access the admin console:</p>
+        <div class="command">
+          <pre><code>https://your_server_ip:7071</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+        <p>Log in with the admin password you set during installation.</p>
+        <p>Configure DNS settings for your domain in the admin console:</p>
+        <div class="command">
+          <pre><code>1. Go to Configure -> DNS
+2. Add your domain
+3. Set MX record to point to your Zimbra server
+4. Configure SPF, DKIM, and DMARC records for email security</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+      </div>
+      
+      <div class="step-section">
+        <h3><span class="step-number">5</span> Post-Installation Configuration</h3>
+        <p>Enable and start Zimbra services:</p>
+        <div class="command">
+          <pre><code>sudo su - zimbra
+zmcontrol start
+zmcontrol status</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+        <p>Set up SSL certificate for secure connections:</p>
+        <div class="command">
+          <pre><code>zmcertmgr createca -new
+zmcertmgr createcrt -new -subject "CN=mail.yourdomain.com"
+zmcertmgr deploycrt self
+zmcertmgr deployca</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+        <p>Restart Zimbra services to apply changes:</p>
+        <div class="command">
+          <pre><code>zmcontrol restart</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+      </div>
+      
+      <div class="step-section">
+        <h3><span class="step-number">6</span> Create Mailboxes and Test</h3>
+        <p>Create your first user mailbox:</p>
+        <div class="command">
+          <pre><code>zmprov ca user1@yourdomain.com password123
+zmprov ma user1@yourdomain.com zimbraMailStatus enabled</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+        <p>Access the web client to test email functionality:</p>
+        <div class="command">
+          <pre><code>https://your_server_ip</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+        <p>Log in with the user credentials you just created.</p>
+      </div>
+      
+      <div class="step-section">
+        <h3><span class="step-number">7</span> Security Hardening</h3>
+        <p>Configure firewall rules for Zimbra:</p>
+        <div class="command">
+          <pre><code># For Ubuntu
+sudo ufw allow 25/tcp    # SMTP
+sudo ufw allow 80/tcp    # HTTP
+sudo ufw allow 443/tcp   # HTTPS
+sudo ufw allow 465/tcp   # SMTP SSL
+sudo ufw allow 587/tcp   # SMTP Submission
+sudo ufw allow 993/tcp   # IMAP SSL
+sudo ufw allow 995/tcp   # POP3 SSL
+sudo ufw allow 7071/tcp  # Admin console
+
+# For RHEL/Rocky/AlmaLinux
+sudo firewall-cmd --permanent --add-port=25/tcp
+sudo firewall-cmd --permanent --add-port=80/tcp
+sudo firewall-cmd --permanent --add-port=443/tcp
+sudo firewall-cmd --permanent --add-port=465/tcp
+sudo firewall-cmd --permanent --add-port=587/tcp
+sudo firewall-cmd --permanent --add-port=993/tcp
+sudo firewall-cmd --permanent --add-port=995/tcp
+sudo firewall-cmd --permanent --add-port=7071/tcp
+sudo firewall-cmd --reload</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+        <p>Enable antivirus and antispam protection:</p>
+        <div class="command">
+          <pre><code>zmamavisdctl enable
+zmantispamctl enable</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+      </div>
+      
+      <div class="step-section">
+        <h3><span class="step-number">8</span> Backup and Maintenance</h3>
+        <p>Set up regular backups:</p>
+        <div class="command">
+          <pre><code># Create backup script
+echo '#!/bin/bash
+/opt/zimbra/bin/zmbackup -f -a all' | sudo tee /opt/zimbra/backup/backup.sh
+sudo chmod +x /opt/zimbra/backup/backup.sh</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+        <p>Schedule daily backups with cron:</p>
+        <div class="command">
+          <pre><code>sudo crontab -e
+# Add the following line (runs daily at 2 AM)
+0 2 * * * /opt/zimbra/backup/backup.sh</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+        <p>Monitor Zimbra logs:</p>
+        <div class="command">
+          <pre><code>tail -f /opt/zimbra/log/mailbox.log
+tail -f /opt/zimbra/log/nginx.log</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+      </div>
+      
+      <div class="step-section">
+        <h3><span class="step-number">9</span> Troubleshooting</h3>
+        <p>Common issues and solutions:</p>
+        
+        <h4>a) Port already in use</h4>
+        <p>If ports are already in use, check what's running:</p>
+        <div class="command">
+          <pre><code>sudo netstat -tulpn | grep :25
+sudo netstat -tulpn | grep :80</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+        <p>Stop conflicting services (like postfix, sendmail, apache, nginx).</p>
+        
+        <h4>b) DNS resolution issues</h4>
+        <p>Ensure your hostname resolves correctly:</p>
+        <div class="command">
+          <pre><code>nslookup mail.yourdomain.com
+dig mail.yourdomain.com</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+        
+        <h4>c) SSL certificate problems</h4>
+        <p>Regenerate and redeploy certificates:</p>
+        <div class="command">
+          <pre><code>sudo su - zimbra
+zmcertmgr createca -new
+zmcertmgr createcrt -new -subject "CN=mail.yourdomain.com"
+zmcertmgr deploycrt self
+zmcertmgr deployca
+zmcontrol restart</code></pre>
+          <button class="command-copy">Copy</button>
+        </div>
+      </div>
+
+      <div class="tutorial-nav">
+        <a href="phpmyadmin-setup.html"><i class="fas fa-arrow-left"></i> Previous: phpMyAdmin Setup</a>
+        <a href="cacti-monitoring.html">Next: Cacti Monitoring <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <div class="success-message" id="copy-success">
+    <i class="fas fa-check-circle"></i> Command copied to clipboard!
+  </div>
+
+  <footer>
+    <p>&copy; 2023 LearnLinuxOnline. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Tab functionality
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        
+        // Hide all tab content
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // Show the selected tab content
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(`${tabId}-content`).classList.add('active');
+      });
+    });
+
+    // Copy to clipboard functionality
+    document.querySelectorAll('.command-copy').forEach(button => {
+      button.addEventListener('click', function() {
+        const code = this.previousElementSibling.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+          const successMsg = document.getElementById('copy-success');
+          successMsg.style.display = 'block';
+          setTimeout(() => {
+            successMsg.style.display = 'none';
+          }, 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
